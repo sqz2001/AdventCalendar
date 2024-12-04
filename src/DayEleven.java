@@ -1,60 +1,79 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class DayEleven extends JFrame {
     public DayEleven() {
-        setTitle("Day 12 Surprise!");
-        setSize(400,500);
+        setTitle("Day 11 Surprise!");
+        setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setVisible(true);
-        
-        //make main panel
-        JPanel main = new JPanel();
-        main.setLayout(new BorderLayout());
+
+        // Main panel
+        JPanel main = new JPanel(new BorderLayout());
         main.setBackground(new Color(191, 219, 196));
-        
-        //make text area
-        JTextArea text = new JTextArea("Hi my love! Sorry for playing too much, here's a photo of me scheming");
+
+        // Text area
+        JTextArea text = new JTextArea("Hi my love! Today's surprise is a video of me being emo during COVID. " +
+                "Totally forgot this existed but found it digging through Google Drive. Click the pic to see!");
         text.setFont(new Font("Cooper Black", Font.BOLD, 20));
         text.setForeground(new Color(83, 105, 87));
         text.setBackground(new Color(191, 219, 196));
         text.setEditable(false);
-        text.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        text.setLineWrap(true);
+        text.setWrapStyleWord(true);
+        text.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         main.add(text, BorderLayout.NORTH);
 
-        // load image
-        ImageIcon originalImage = new ImageIcon(
-                "C:\\Users\\sarah\\IdeaProjects\\Advent Calendar\\src\\resources\\project photos\\.jpg");
+        // center panel holding image
+        JPanel centerPanel = new JPanel();
+        centerPanel.setBackground(new Color(191, 219, 196));
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        // Get original dimensions of image
-        int originalWidth = originalImage.getIconWidth();
-        int originalHeight = originalImage.getIconHeight();
+        // Clickable icon
+        String imagePath = "C:\\Users\\sarah\\IdeaProjects\\Advent Calendar\\src\\resources\\project photos\\emo.jpg";
+        ImageIcon imageIcon = new ImageIcon(imagePath);
+        JLabel imageLabel = new JLabel();
 
-        // Set maximum dimensions
-        int maxWidth = 350;
-        int maxHeight = 300;
+        // Resize the icon
+        Image img = imageIcon.getImage();
+        Image resizedImage = img.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        imageLabel.setIcon(new ImageIcon(resizedImage));
+        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Create scaling factor to size down image while maintaining aspect ratio
-        double widthScale = (double) maxWidth / originalWidth;
-        double heightScale = (double) maxHeight / originalHeight;
-        double scale = Math.min(widthScale, heightScale);
+        // Add click listener
+        imageLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebpage("https://youtube.com/shorts/RuJQzIQ3avw");
+            }
+        });
 
-        // Applying the new scale factor to resize image
-        int newWidth = (int) (originalWidth * scale);
-        int newHeight = (int) (originalHeight * scale);
+        // Add image to center panel
+        centerPanel.add(imageLabel);
+        main.add(centerPanel, BorderLayout.CENTER);
 
-        // Scaled image to fit screen while maintaining aspect ratio
-        Image scaledImage = originalImage.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-
-        //add image to main panel
-        JLabel imageLabel = new JLabel(scaledIcon);
-        imageLabel.setHorizontalAlignment(JLabel.CENTER);
-        main.add(imageLabel, BorderLayout.CENTER);
-
-        //add pain panel to frame
+        // Add main panel to frame
         add(main);
+
+        // Display the frame
         setVisible(true);
+    }
+
+    private void openWebpage(String urlString) {
+        try {
+            Desktop.getDesktop().browse(new URI(urlString));
+        } catch (IOException | URISyntaxException e) {
+            JOptionPane.showMessageDialog(this, "Unable to open the link. Check your internet connection or try again later.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(DayEleven::new);
     }
 }
