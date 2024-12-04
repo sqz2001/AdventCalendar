@@ -17,7 +17,7 @@ public class DayTwentyOne extends JFrame {
     private final String correctAnswer = "Hog"; // The correct answer the user must guess
     private boolean gameOver = false;
 
-    public DayTwentyOne(Color gridColor) {
+    public DayTwentyOne() {
         setTitle("Day 21 Surprise!");
         setSize(1200, 900);
         setLocationRelativeTo(null);
@@ -34,7 +34,7 @@ public class DayTwentyOne extends JFrame {
 
         // Center Panel: Question buttons
         JPanel questionPanel = new JPanel(new GridLayout(4, 5, 10, 10));
-        questionPanel.setBackground(gridColor); // Use custom background color for grid
+        questionPanel.setBackground(new Color(86, 120, 95)); // Use custom background color for grid
         for (String question : questions) {
             JButton questionButton = new JButton(question);
             questionButton.setFont(new Font("Cooper Black", Font.BOLD, 12));
@@ -126,17 +126,6 @@ public class DayTwentyOne extends JFrame {
                 // Disable the clicked button
                 sourceButton.setEnabled(false);
                 questionsAsked++;
-
-                // Optional: Game will not stop even if questions are answered
-                // If you want, uncomment the following block to restrict to 20 questions:
-                /*
-                if (questionsAsked == 20) {
-                    statusLabel.setText("You have asked 20 questions. Make your guess!");
-                    guessField.setEnabled(true);
-                    submitButton.setEnabled(true);
-                    gameOver = true;
-                }
-                */
             }
         }
     }
@@ -170,7 +159,7 @@ public class DayTwentyOne extends JFrame {
         SwingUtilities.invokeLater(() -> {
             // Example with a custom grid color (light green)
             Color customGridColor = new Color(237, 199, 237);
-            DayTwentyOne game = new DayTwentyOne(customGridColor);
+            DayTwentyOne game = new DayTwentyOne();
             game.setVisible(true);
         });
     }

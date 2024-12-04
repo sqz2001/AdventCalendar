@@ -120,6 +120,8 @@ public class AdventCalendar extends JFrame {
             case 18 -> new DayEighteen();
             case 19 -> new DayNineteen();
             case 20 -> new DayTwenty();
+            case 21 -> new DayTwentyOne();
+
 
 
             default -> JOptionPane.showMessageDialog(this, "Stay tuned for more surprises!");
