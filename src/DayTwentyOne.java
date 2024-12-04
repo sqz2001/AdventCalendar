@@ -157,7 +157,7 @@ public class DayTwentyOne extends JFrame {
     // Main method to run the game
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            // Example with a custom grid color (light green)
+
             Color customGridColor = new Color(237, 199, 237);
             DayTwentyOne game = new DayTwentyOne();
             game.setVisible(true);
