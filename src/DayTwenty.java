@@ -63,7 +63,8 @@ public class DayTwenty extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (JPanel slot : slots) {
-                    slot.setBackground(new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
+                    slot.setBackground(
+                            new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
                 }
                 step++;
                 if (step > 10) {
@@ -75,7 +76,7 @@ public class DayTwenty extends JFrame {
 
         playButton.addActionListener(e -> {
             resetSlots();
-            step = 0; // Reset the step counter
+            step = 0;
             animationTimer.start();
         });
 
