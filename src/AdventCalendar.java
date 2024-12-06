@@ -40,9 +40,8 @@ public class AdventCalendar extends JFrame {
         JLabel messageLabel = new JLabel(
                 "<html> <center> Hello my love!<br>" +
                         "I made a program that functions like a digital advent calendar " +
-                        "with different surprises for you each day. <br>" +
-                        "Click the day of the month for a treat :) <br>" +
-                        "If there are less than 31 days in the month, then you get additional surprises !<center>"
+                        "with different surprises for you each day leading up to Christmas. <br>" +
+                        "Click the day of the month for a treat :) <center>"
         );
         // Set font and color of message and center it
         messageLabel.setFont(new Font("Cooper Black", Font.BOLD, 30));
@@ -74,7 +73,7 @@ public class AdventCalendar extends JFrame {
         calendarPanel.setBackground(new Color(189, 212, 174));
         Color calendarDayButton = new Color(124, 145, 110);
 
-        for (int i = 1; i <= 31; i++) {
+        for (int i = 1; i <= 25; i++) {
             JButton dayButton = new JButton(String.valueOf(i));
             dayButton.setFont(new Font("Cooper Black", Font.BOLD, 30));
             int day = i;
@@ -84,15 +83,6 @@ public class AdventCalendar extends JFrame {
             calendarPanel.add(dayButton);
         }
 
-        // Additional heart buttons for aesthetic completion
-        for (int i = 32; i <= 35; i++) {
-            JButton heartButton = new JButton("♥");
-            heartButton.setBackground(calendarDayButton);
-            heartButton.setOpaque(true);
-            heartButton.setFont(new Font("Arial", Font.BOLD, 30));
-            heartButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "A special message just for you ❤️"));
-            calendarPanel.add(heartButton);
-        }
 
         return calendarPanel;
     }
@@ -121,8 +111,9 @@ public class AdventCalendar extends JFrame {
             case 19 -> new DayNineteen();
             case 20 -> new DayTwenty();
             case 21 -> new DayTwentyOne();
-
-
+            case 22 -> new DayTwentyTwo();
+            case 23 -> new DayTwentyThree();
+            case 24 -> new DayTwentyFour();
 
             default -> JOptionPane.showMessageDialog(this, "Stay tuned for more surprises!");
         }
